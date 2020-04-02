@@ -7,8 +7,23 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+// const ASSETS_PATH = path.resolve(__dirname, 'assets')
+
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
+const defaultFilenamePattern = () => isDev ? '[path][name].[ext]' : '[path][name].[hash].[ext]'
+
+const assetsLoader = () => {
+  return [{
+    loader: 'file-loader',
+    options: {
+      name: defaultFilenamePattern(),
+      esModule: false,
+    }
+  }]
+}
 
 const optimization = () => {
   const config = {
@@ -26,8 +41,6 @@ const optimization = () => {
 
   return config;
 }
-
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
 
 const vueStyleLoaders = extra => {
   const loaders = [
@@ -103,6 +116,7 @@ module.exports = {
     extensions: ['.js', '.vue'],
     alias: {
       '@': path.resolve(__dirname),
+      '@assets': path.resolve(__dirname, 'src/assets'),
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
@@ -115,6 +129,7 @@ module.exports = {
   output: {
     filename: filename('js'),
     path: path.resolve(__dirname, 'dist'),
+    // publicPath: ASSETS_PATH,
   },
   plugins: plugins(),
   module: {
@@ -136,11 +151,11 @@ module.exports = {
       },
       {
         test: /\.(png|img|jpg|svg|gif)$/,
-        use: ['file-loader']
+        use: assetsLoader()
       },
       {
         test: /\.(ttf|wof|woff|eot)$/,
-        use: ['file-loader']
+        use: assetsLoader()
       },
       {
         test: /\.js$/,

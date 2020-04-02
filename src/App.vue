@@ -1,5 +1,6 @@
 <template lang="pug">
   #app(@click="getClicks") {{ message }}
+    router-view
 </template>
 
 <script>
@@ -28,6 +29,7 @@ export default {
 #app 
   display flex
   height 100%
+  flex-direction column
   justify-content center
   align-items center
   cursor pointer
