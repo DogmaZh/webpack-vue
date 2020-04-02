@@ -1,8 +1,14 @@
 <template lang="pug">
-  .user Hello World from user!
+  .user user page
+    br
     router-link(:to="{name:'main'}") Back to main
+    br
+    br
     .user__children More nesting here
-      router-link(:to="{name:'userInfo'}") To user info
+      br
+      router-link(:to="{name:'userInfo'}") Open user info
+      br
+      br
       router-view
 </template>
 

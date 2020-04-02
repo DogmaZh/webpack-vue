@@ -1,5 +1,7 @@
 <template lang="pug">
-  #app(@click="getClicks") {{ message }}
+  #app.main(@click="getClicks") 
+    .main__clicks-count {{ message }}
+    br
     router-view
 </template>
 
@@ -26,11 +28,13 @@ export default {
 </script>
 
 <style lang="stylus">
-#app 
+.main 
+  padding 30px 50px 0
   display flex
   height 100%
   flex-direction column
-  justify-content center
-  align-items center
   cursor pointer
+  
+  &__clicks-count 
+    text-align center
 </style>

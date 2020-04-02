@@ -1,8 +1,11 @@
 <template lang="pug">
   .user-info User info
-    router-link(:to="{name:'user'}") Back to parent
+    br
+    router-link(:to="{name:'user'}") Close info
+    br
     theme-button(text="Info button")
-    img(src="@assets/img/pUser/test.jpg" style="width: 100px")
+    br
+    img(src="@assets/img/pUser/test.svg" style="width: 100px")
 </template>
 
 <script>
@@ -17,8 +20,6 @@ export default {
 
 <style lang="stylus">
 .user-info {
-  display flex
-  flex-direction column
-  align-items center  
+
 }
 </style>

@@ -3,26 +3,22 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import pHelloIndex from '../pages/Hello/pHelloIndex'
-import pUserIndex from '../pages/User/pUserIndex'
-import pUserInfo from '../pages/User/pUserInfo'
-
 const mainPage = [{
   path: '/',
   name: 'main',
-  component: pHelloIndex
+  component: () => import('../pages/Hello/pHelloIndex'),
 }];
 
 const userInfo = [{
   path: 'info',
   name: 'userInfo',
-  component: pUserInfo,
+  component: () => import('../pages/User/pUserInfo'),
 }]
 
 const userPage = [{
   path: '/user',
   name: 'user',
-  component: pUserIndex,
+  component: () => import('../pages/User/pUserIndex'),
   children: [
     ...userInfo
   ]

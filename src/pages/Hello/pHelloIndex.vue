@@ -1,8 +1,12 @@
 <template lang="pug">
-  .hello Hello World!
+  .hello
     img(src="@assets/img/pUser/test.jpg" style="width: 100px")
+    br
+    br
     theme-button(text="Just a button")
-    router-link(:to="{name:'user'}") To router check
+    br
+    br
+    router-link(:to="{name:'user'}") user page
 </template>
 
 <script>
@@ -16,8 +20,5 @@ export default {
 </script>
 
 <style lang="stylus">
-.hello
-  display flex
-  flex-direction column
-  align-items center
+
 </style>

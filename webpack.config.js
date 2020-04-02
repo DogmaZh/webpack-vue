@@ -10,17 +10,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
 
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
-const defaultFilenamePattern = () => isDev ? '[path][name].[ext]' : '[path][name].[hash].[ext]'
+const filename = ext => `[name].${ext}`;
+const defaultFilenamePattern = '[path][name].[ext]'
 
-const assetsLoader = () => {
-  return [{
+const assetsLoader = loader => {
+  const base = [{
     loader: 'file-loader',
     options: {
-      name: defaultFilenamePattern(),
+      name: defaultFilenamePattern,
       esModule: false
     }
   }]
+
+  if (loader) {
+    base.push(loader);
+  }
+
+  return base 
 }
 
 const optimization = () => {
@@ -130,7 +136,7 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
-    port: 3779,
+    port: 4400,
     hot: isDev,
     historyApiFallback: true,
   },
