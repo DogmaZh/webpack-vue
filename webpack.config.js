@@ -7,8 +7,6 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-// const ASSETS_PATH = path.resolve(__dirname, 'assets')
-
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
 
@@ -20,7 +18,7 @@ const assetsLoader = () => {
     loader: 'file-loader',
     options: {
       name: defaultFilenamePattern(),
-      esModule: false,
+      esModule: false
     }
   }]
 }
@@ -95,7 +93,7 @@ const plugins = () => {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, 'src/favicon.ico'),
-        to: path.resolve(__dirname, 'dist')
+        to: path.resolve(__dirname, 'public')
       }
     ]),
     new MiniCssExtractPlugin({
@@ -104,6 +102,16 @@ const plugins = () => {
   ]
 
   return base;
+}
+
+const outputParams = () => {
+  const params = {
+    filename: filename('js'),
+    path: path.resolve(__dirname, 'public/static/user_new'),
+    publicPath: '/',
+  }
+
+  return params;
 }
 
 module.exports = {
@@ -122,15 +130,12 @@ module.exports = {
   },
   optimization: optimization(),
   devServer: {
-    port: 4200,
-    hot: isDev
+    port: 3779,
+    hot: isDev,
+    historyApiFallback: true,
   },
   devtool: isDev ? 'source-map' : '',
-  output: {
-    filename: filename('js'),
-    path: path.resolve(__dirname, 'dist'),
-    // publicPath: ASSETS_PATH,
-  },
+  output: outputParams(),
   plugins: plugins(),
   module: {
     rules: [

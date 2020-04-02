@@ -2,7 +2,7 @@
   .user-info User info
     router-link(:to="{name:'user'}") Back to parent
     theme-button(text="Info button")
-    img(src="@assets/img/pUser/test.jpg")
+    img(src="@assets/img/pUser/test.jpg" style="width: 100px")
 </template>
 
 <script>
